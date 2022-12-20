@@ -1,0 +1,39 @@
+html, body {
+    height: 100%;
+}
+
+* {
+    font-size: 100%;
+}
+
+.menu-sidebar {
+    background-color: #1d56b3;
+    padding-bottom: 30%;
+}
+
+
+.nav-item {
+    padding-left: 2rem;
+    transition: 0.35s;
+}
+
+.nav-item:hover {
+	background-color: #8f0439;
+}
+
+.navbrand {
+    background-color: #073d94;
+    width: 100%;
+    padding: 1rem 0 1rem 3rem;
+    margin: 0;
+}
+
+.content {
+    margin-top: 4rem;
+    min-width: 100%;
+}
+
+
+.content-col {
+    background-color: #e8e8e8;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.2.3-dist/css/bootstrap.min.css') }}">
+    {% block customhead %}{% endblock %}
+
+    <title>{{ app_name }}</title>
+  </head>
+  <body style="height: 100%;">
+      <!-- Sidebar -->
+      <div class="row" style="height: 100%;">
+        <div class="col-md-2 menu-sidebar" style="padding: 0;">
+          <p class="text-white navbrand">{{ app_name|upper }}</p>
+          <div style="height: 8px; background-color: #FFF; width: 100%; margin: px 0;"></div>
+          <ul class="nav flex-column">
+            <li class="nav-item" {% if page == 'dashboard' %} style="background-color: #8f0439;" {% endif %}>
+              <a class="nav-link active text-white" href="{{ url_for('dashboard') }}">
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item" {% if page == 'scan' %} style="background-color: #8f0439;" {% endif %}>
+              <a class="nav-link  text-white" href="{{ url_for('scan') }}">
+                Cek Plagiarisme
+              </a>
+            </li>
+            <li class="nav-item" {% if page == 'result' %} style="background-color: #8f0439;" {% endif %}>
+              <a class="nav-link  text-white" href="{{ url_for('result') }}">
+                Hasil
+              </a>
+            </li>
+            <div style="height: 2px; background-color: #FFF; width: 100%; margin: 0px;"></div>
+            <li style="padding: 0.5rem 0 0.5rem 3rem; color: #FFF;">Kontak :</li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">
+                Whatsapp
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">
+                Instagram
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-10 content-col" style="padding: 0;">
+          <div style="height:64px; width:100%; background-color: #FFF;"></div>
+          <div class="content container">{% block content %}{% endblock %}</div>
+        </div>
+      </div>
+
+
+    <script src="{{ url_for('static', filename='bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js') }}"></script>
+    {% block customfooter %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{% extends "layouts/base.html" %}
+
+{% block customhead %}
+<style>
+    .form {
+        background-color: white;
+        padding: 3rem;
+        padding-left: 1rem;
+        margin-bottom: 20%;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<h1>Cek Plagiarisme</h1>
+<div class="form">
+    <form action="">
+        <textarea class="form-control" rows="25" name="text" style="background-color: #e8e8e8;"></textarea>
+        <div class="text-center mt-5">
+            <button type="submit" class="btn btn-primary" style="font-size: 24px;">Cek Plagiarisme</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block customfooter %}
+{% endblock %}
