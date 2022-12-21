@@ -1,0 +1,4 @@
+bson
+flask
+pymongo
+python-Levenshtein

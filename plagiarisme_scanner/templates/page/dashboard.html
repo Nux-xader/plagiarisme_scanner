@@ -19,8 +19,15 @@
         margin-top: 5rem;
         margin-bottom: 5rem;
     }
+
+    .card-content {
+        font-size: 120px;
+        font-weight: bold;
+        float: right;
+    }
 </style>
 <script type="text/javascript" src="{{ url_for('static', filename='chartjs/chartjs.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/day.js') }}"></script>
 {% endblock %}
 
 
@@ -29,24 +36,24 @@
     <div class="col-md-4">
         <div class="card" style="background-color: rgb(0, 166, 0); border-color: rgb(0, 166, 0);">
             <div class="card-body">
-                <h3 class="card-title">Card title</h3>
-                <h3 class="card-title">900</h3>
+                <h3 class="card-title">Data Abstracts</h3>
+                <p class="card-content">{{ total_abstracts }}</p>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card" style="background-color: rgb(255, 217, 0); border-color: rgb(255, 217, 0);">
             <div class="card-body">
-                <h3 class="card-title">Card title</h3>
-                <h3 class="card-title">900</h3>
+                <h3 class="card-title">Checked Abstracts</h3>
+                <p class="card-content">{{ total_scanned }}</p>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="card" style="background-color: rgb(59, 177, 255); border-color: rgb(59, 177, 255);">
             <div class="card-body">
-                <h3 class="card-title">Card title</h3>
-                <h3 class="card-title">900</h3>
+                <h3 class="card-title">Average Plagiarism</h3>
+                <p class="card-content">{{ avg_plagiarism }}</p>
             </div>
         </div>
     </div>
@@ -65,21 +72,20 @@
 {% block customfooter %}
 <script type="text/javascript">
     const ctx = document.getElementById('chart');
-    const data = [
-        { year: "Category 1", count: 10 },
-        { year: "Category 2", count: 20 },
-        { year: "Category 3", count: 15 },
-        { year: "Category 4", count: 25 }
-    ];
+    const data = {{ graph|tojson }};
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: data.map(row => row.year),
+        labels: data.map((row) => {
+            console.log(row.scanning_time) 
+            return dayjs(row.scanning_time).format("YYYY-M-D H:m:s");
+            // return `${date.$y()}-${date.getMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+        }),
         datasets: [
           {
             barPercentage: 0.3,
-            label: 'Category',
-            data: data.map(row => row.count), 
+            label: 'Percentase Plagiarisme',
+            data: data.map(row => row.percentage), 
             backgroundColor: "rgb(19, 147, 232)"
           }
         ]
@@ -88,15 +94,22 @@
         scales: {
             x: {
                 grid: {
-                display: false
+                    display: false
                 }
-            }
+            }, 
+            y: {
+                ticks: {
+                    min: 0,
+                    max: 100,
+                    callback: (value) => {return value+"%"}
+                }
+            }, 
         }, 
         plugins: {
             legend: {
                 position: "bottom"
             }
-        }
+        }, 
       }
     });
 </script>

@@ -15,10 +15,15 @@
 {% block content %}
 <h1>Cek Plagiarisme</h1>
 <div class="form">
-    <form action="">
+    {% if scanning %}
+        <div class="alert alert-warning d-flex align-items-center" role="alert">
+            {{ msg }}
+        </div>
+    {% endif %}
+    <form action="{{ url_for('scan') }}" method="POST">
         <textarea class="form-control" rows="25" name="text" style="background-color: #e8e8e8;"></textarea>
         <div class="text-center mt-5">
-            <button type="submit" class="btn btn-primary" style="font-size: 24px;">Cek Plagiarisme</button>
+            <button type="submit" class="btn btn-primary" style="font-size: 24px;" {% if scanning %}disabled {% endif %}>Cek Plagiarisme</button>
         </div>
     </form>
 </div>

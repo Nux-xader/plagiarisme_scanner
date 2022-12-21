@@ -1,0 +1,78 @@
+{% extends "layouts/base.html" %}
+
+{% block customhead %}
+<style>
+    .result {
+        background-color: white;
+        padding: 3rem;
+        padding-left: 1rem;
+        margin-bottom: 20%;
+    }
+
+    .circle-card {
+        border-radius: 100%;
+        border-width: 15px;
+        align-items: center;
+        width: 175px;
+        height: 175px;
+    }
+
+    .circle-card h3 {
+        padding: 38px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="result">
+    {% if scanning %}
+    <div class="alert alert-warning d-flex align-items-center" role="alert">
+        Text sedang di scan, tunggu beberapa saat
+    </div>
+    {% else %}
+        {% if result_available %}
+            <h1 class="text-center fw-bold">HASIL</h1>
+            <div style="display: flex; flex-direction:column; justify-content:center; align-items: center;">
+                <div class="card circle-card" style="border-color: rgb(19, 147, 232); margin: 30px 0;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ percentage }}%</h3>
+                    </div>
+                </div>
+                <h2 class="text-center fw-bold">Selesai: {{ percentage }}% Dicentang</h2>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-1">
+                    <div class="card circle-card" style="border-color: rgb(19, 147, 232); margin-left: 45%; margin-top: 2rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">0%</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-1" style="margin-left: 88rem;">
+                    <div class="card circle-card" style="border-color: rgb(19, 147, 232); margin-left: 45%; margin-top: 2rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ percentage }}%</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <hr style="width: 88%; margin-left: 3%; height: 1rem;  margin-top: 4rem;"> -->
+            <div style="width: 98%; margin-left: 1.7%; margin-top: 4rem;">
+                <div style="height: 1rem; background-color: rgb(19, 147, 232); max-width: {{ percentage }}%;"></div>
+            </div>
+        {% else %}
+        <div class="alert alert-warning d-flex align-items-center" role="alert">
+            Belum ada text yang di scan, silahkan scan text<a href="{{ url_for('scan') }}" style="padding-left: 0.5rem;"> di sini</a>
+        </div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block customfooter %}
+{% endblock %}
