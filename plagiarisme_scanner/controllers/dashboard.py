@@ -1,4 +1,4 @@
-from plagiarisme_scanner import app, html, app_name, mongo_db
+from plagiarisme_scanner import app, html, mongo_db
 
 
 def parse_unit(num:int) -> str:

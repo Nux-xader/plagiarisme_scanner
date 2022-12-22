@@ -3,9 +3,7 @@ from flask import request
 from bson import ObjectId
 from datetime import datetime
 from threading import Thread
-from plagiarisme_scanner import (
-    app, html, app_name, mongo_db, levenshtein_distance
-)
+from plagiarisme_scanner import app, html, mongo_db, levenshtein_distance
 
 
 def percentage(text:str):
