@@ -14,17 +14,19 @@ def percentage(text:str):
         coll_name="status", 
         docs={"_id": scanning_id, "scanning": True}
     )
-    time.sleep(5)
-    result = levenshtein_distance.plagiarism_percentage(text=text)
+    # time.sleep(5)
+    result = levenshtein_distance.plagiarism_percentage(text=text, add_db=False)
     mongo_db.del_one(
         coll_name="status", 
         filters={"_id": scanning_id}
     )
+    used_time = round(datetime.now().timestamp()-scanning_time, 2)
     mongo_db.insert(
         coll_name="results", 
         docs={
             "percentage": result, 
-            "scanning_time": scanning_time
+            "scanning_time": scanning_time, 
+            "used_time": used_time
         }
     )
 

@@ -21,18 +21,24 @@ def result():
         pipline=[
             {'$sort': {'_id': -1}}, 
             {'$limit': 1}, 
-            {'$project': {'percentage': '$percentage', '_id': 0}}
+            {'$project': {
+                'used_time': '$used_time', 
+                'percentage': '$percentage', 
+                '_id': 0
+            }}
         ], 
         output=tuple
     )
     if len(result) > 0:
         result_available = True
         percentage = result[0]['percentage']
+        used_time = result[0]['used_time']
 
 
     return html(
         'page/result.html', 
         page='result', 
+        used_time=used_time, 
         percentage=percentage, 
         scanning=scanning, 
         result_available=result_available
